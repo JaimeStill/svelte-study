@@ -27,6 +27,20 @@
     * [Component Events](#component-events)
     * [Event Forwarding](#event-forwarding)
     * [DOM Event Forwarding](#dom-event-forwarding)
+* [Bindings](#bindings)
+    * [Text Inputs](#text-inputs)
+    * [Numeric Inputs](#numeric-inputs)
+    * [Checkbox Inputs](#checkbox-inputs)
+    * [Group Inputs](#group-inputs)
+    * [Textarea Inputs](#textarea-inputs)
+    * [Select Bindings](#select-bindings)
+    * [Select Multiple](#select-multiple)
+    * [Contenteditable Bindings](#contenteditable-bindings)
+    * [Each Block Bindings](#each-block-bindings)
+    * [Media Elements](#media-elements)
+    * [Dimensions](#dimensions)
+    * [This](#this)
+    * [Component Bindings](#component-bindings)
 
 ## Introduction
 [Back to Top](#svelte-tutorial-notes)
@@ -36,7 +50,7 @@
 
 ```svelte
 <script>
-    let name = 'world';
+  let name = 'world';
 </script>
 
 <h1>Hello {name}!</h1>
@@ -47,7 +61,7 @@
 
 ```svelte
 <script>
-    let src = 'tutorial/image.gif';
+  let src = 'tutorial/image.gif';
 </script>
 
 <img src={src} />
@@ -64,11 +78,11 @@
 
 ```svelte
 <style>
-    p {
-        color: purple;
-        font-family: 'Comic Sans MS', cursive;
-        font-size: 2em;
-    }
+  p {
+    color: purple;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 2em;
+  }
 </style>
 
 <p>This is a paragraph.</p>
@@ -81,15 +95,15 @@ Styles do not leak between components.
 
 ```svelte
 <script>
-    import Nested from './Nested.svelte';
+  import Nested from './Nested.svelte';
 </script>
 
 <style>
-    p {
-        color: purple;
-        font-family: 'Comic Sans MS', cursive;
-        font-size: 2em;
-    }
+  p {
+    color: purple;
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 2em;
+  }
 </style>
 
 <p>This is a paragraph.</p>
@@ -105,7 +119,7 @@ Styles do not leak between components.
 
 ```svelte
 <script>
-    let string = `this string contains some <strong>HTML!!!</strong>`;
+  let string = `this string contains some <strong>HTML!!!</strong>`;
 </script>
 
 <p>{@html string}</p>
@@ -121,15 +135,15 @@ Keep the DOM in sync with your application state using *reactivity*.
 
 ```svelte
 <script>
-    let count = 0;
+  let count = 0;
 
-    function handleClick() {
-        count += 1;
-    }
+  function handleClick() {
+    count += 1;
+  }
 </script>
 
 <button>
-    Clicked {count} { count === 1 ? 'time' : 'times' }
+  Clicked {count} { count === 1 ? 'time' : 'times' }
 </button>
 ```
 
@@ -140,16 +154,16 @@ Often, some parts of a component's state need to be computed from *other* parts,
 
 ```svelte
 <script>
-    let count = 0;
-    $: doubled = count * 2;
+  let count = 0;
+  $: doubled = count * 2;
 
-    function handleClick() {
-        count += 1;
-    }
+  function handleClick() {
+    count += 1;
+  }
 </script>
 
 <button on:click={handleClick}>
-    Clicked {count} { count === 1 ? 'time' : 'times' }
+  Clicked {count} { count === 1 ? 'time' : 'times' }
 </button>
 <p>{count} doubled is {doubled}</p>
 ```
@@ -166,8 +180,8 @@ Statements can be grouped with a block:
 
 ```svelte
 $: {
-    console.log(`the count is ${count}`);
-    alert(`I SAID THE COUNT IS ${count}`);
+  console.log(`the count is ${count}`);
+  alert(`I SAID THE COUNT IS ${count}`);
 }
 ```
 
@@ -175,8 +189,8 @@ You can put the `$:` in front of things like `if` blocks:
 
 ```svelte
 $: if (count >= 10) {
-    alert(`count is dangerously high!`);
-    count = 9;
+  alert(`count is dangerously high!`);
+  count = 9;
 }
 ```
 
@@ -187,8 +201,8 @@ Because Svelte's reactivity is triggered by assignments, using array methods lik
 
 ```svelte
 function addNumber() {
-    numbers.push(numbers.length + 1);
-    numbers = numbers; // redundant assignment to trigger update
+  numbers.push(numbers.length + 1);
+  numbers = numbers; // redundant assignment to trigger update
 }
 ```
 
@@ -196,7 +210,7 @@ A better solution
 
 ```svelte
 function addNumber() {
-    numbers = [...numbers, numbers.length + 1];
+  numbers = [...numbers, numbers.length + 1];
 }
 ```
 
@@ -219,7 +233,7 @@ In any real application, you'll need to pass data from one component down to its
 **Nested.svelte**  
 ```svelte
 <script>
-    export let answer;
+  export let answer;
 </script>
 
 <p>The answer is {answer}</p>
@@ -228,7 +242,7 @@ In any real application, you'll need to pass data from one component down to its
 **App.svelte**  
 ```svelte
 <script>
-    import Nested from './Nested.svelte';
+  import Nested from './Nested.svelte';
 </script>
 
 <Nested answer={42}>
@@ -239,7 +253,7 @@ In any real application, you'll need to pass data from one component down to its
 
 ```svelte
 <script>
-    export let answer = 'a mystery';
+  export let answer = 'a mystery';
 </script>
 ```
 
@@ -251,15 +265,15 @@ If you have an object of properties, you can 'spread' them onto a component inst
 **Info.svelte**  
 ```svelte
 <script>
-    export let name;
-    export let version;
-    export let speed;
-    export let website;
+  export let name;
+  export let version;
+  export let speed;
+  export let website;
 </script>
 
 <p>
-    The <code>{name}</code> package is {speed} fast.
-    Download version {version} from <a href="https://www.npmjs.com/package/{name}">npm</a> and <a href={website}>learn more here</a>
+  The <code>{name}</code> package is {speed} fast.
+  Download version {version} from <a href="https://www.npmjs.com/package/{name}">npm</a> and <a href={website}>learn more here</a>
 </p>
 ```
 
@@ -273,15 +287,15 @@ HTML doesn't have a way to express *logic*, like conditionals and loops. Svelte 
 
 ```svelte
 {#if user.loggedIn}
-    <button on:click={toggle}>
-        Log out
-    </button>
+  <button on:click={toggle}>
+    Log out
+  </button>
 {/if}
 
 {#if !user.loggedIn}
-    <button on:click={toggle}>
-        Log in
-    </button>
+  <button on:click={toggle}>
+    Log in
+  </button>
 {/if}
 ```
 
@@ -290,13 +304,13 @@ HTML doesn't have a way to express *logic*, like conditionals and loops. Svelte 
 
 ```svelte
 {#if user.loggedIn}
-    <button on:click={toggle}>
-        Log out
-    </button>
+  <button on:click={toggle}>
+    Log out
+  </button>
 {:else}
-    <button on:click={toggle}>
-        Log in
-    </button>
+  <button on:click={toggle}>
+    Log in
+  </button>
 {/if}
 ```
 
@@ -305,11 +319,11 @@ HTML doesn't have a way to express *logic*, like conditionals and loops. Svelte 
 
 ```svelte
 {#if x > 10}
-    <p>{x} is greater than 10
+  <p>{x} is greater than 10
 {:else if 5 > x}
-    <p>{x} is less than 5</p>
+  <p>{x} is less than 5</p>
 {:else}
-    <p>{x} is between 5 and 10</p>
+  <p>{x} is between 5 and 10</p>
 {/if}
 ```
 
@@ -320,12 +334,12 @@ If you need to loop over lists of data, use an `each` block.
 
 ```svelte
 <ul>
-    {#each cats as cat}
-        <li><a target="_blank"
-               href="https://www.youtube.com/watch?v={cat.id}">
-            {cat.name}
-        </a></li>
-    {/each}
+  {#each cats as cat}
+    <li><a target="_blank"
+           href="https://www.youtube.com/watch?v={cat.id}">
+      {cat.name}
+    </a></li>
+  {/each}
 </ul>
 ```
 
@@ -333,9 +347,9 @@ You can also get the current *index* as a second argument:
 
 ```svelte
 {#each cats as cat, i}
-    <li><a>
-        {i + 1}: {cat.name}
-    </li></a>
+  <li><a>
+    {i + 1}: {cat.name}
+  </li></a>
 {/each}
 ```
 
@@ -346,7 +360,7 @@ By default, when you modify the value of an `each` block, it will add and remove
 
 ```svelte
 {#each things as thing (thing.id)}
-    <Thing current={thing.color} />
+  <Thing current={thing.color} />
 {/each}
 ```
 
@@ -357,11 +371,11 @@ The `(thing.id)` tells Svelte how to figure out what changed.
 
 ```svelte
 {#await promise}
-    <p>...waiting</p>
+  <p>...waiting</p>
 {:then number}
-    <p>The number is {number}</p>
+  <p>The number is {number}</p>
 {:catch error}
-    <p style="color: red">{error.message}</p>
+  <p style="color: red">{error.message}</p>
 {/await}
 ```
 
@@ -369,7 +383,7 @@ If you know that your promise can't reject, you can omit the `catch` block. You 
 
 ```svelte
 {#await promise then value}
-    <p>The value is {value}</p>
+  <p>The value is {value}</p>
 {/await}
 ```
 
@@ -380,20 +394,20 @@ You can listen to any event on an element with the `on:` directive:
 
 ```svelte
 <script>
-    let m = { x: 0, y: 0 };
+  let m = { x: 0, y: 0 };
 
-    function handleMousemove(event) {
-        m.x = event.clientX;
-        m.y = event.clientY;
-    }
+  function handleMousemove(event) {
+    m.x = event.clientX;
+    m.y = event.clientY;
+  }
 </script>
 
 <style>
-    div { width: 100%; height: 100%; }
+  div { width: 100%; height: 100%; }
 </style>
 
 <div on:mousemove={handleMousemove}>
-    The mouse position is {m.x} x {m.y}
+  The mouse position is {m.x} x {m.y}
 </div>
 ```
 
@@ -402,7 +416,7 @@ You can listen to any event on an element with the `on:` directive:
 
 ```svelte
 <div on:mousemove={e => m = { x: e.clientX, y: e.clientY }}>
-    The mouse position is {m.x} x {m.y}
+  The mouse position is {m.x} x {m.y}
 </div>
 ```
 
@@ -422,13 +436,13 @@ You can chain modifiers together: `on:click|once|capture={...}`
 
 ```svelte
 <script>
-    function handleClick() {
-        alert('clicked')
-    }
+  function handleClick() {
+    alert('clicked')
+  }
 </script>
 
 <button on:click|once={handleClick}>
-    Click me
+  Click me
 </button>
 ```
 
@@ -440,15 +454,15 @@ Components can also dispatch events, and must do so by creating an event dispatc
 **Inner.svelte**  
 ```svelte
 <script>
-    import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher } from 'svelte';
 
-    const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 
-    function sayHello() {
-        dispatch('message', {
-            text: 'Hello!'
-        });
-    }
+  function sayHello() {
+    dispatch('message', {
+      text: 'Hello!'
+    });
+  }
 </script>
 
 <button on:click{sayHello}>
@@ -459,11 +473,11 @@ Components can also dispatch events, and must do so by creating an event dispatc
 **App.svelte**  
 ```svelte
 <script>
-    import Inner from './Inner.svelte';
+  import Inner from './Inner.svelte';
 
-    function handleMessage(event) {
-        alert(event.detail.text);
-    }
+  function handleMessage(event) {
+    alert(event.detail.text);
+  }
 </script>
 
 <Inner on:message={handleMessage} />
@@ -482,14 +496,14 @@ One way we could solve the problem is adding `createEventDispatcher` to `Outer.s
 
 ```svelte
 <script>
-    import Inner from './Inner.svelte';
-    import { createEventDispatcher } from 'svelte';
+  import Inner from './Inner.svelte';
+  import { createEventDispatcher } from 'svelte';
 
-    const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher();
 
-    function forward(event) {
-        dispatch('message', event.detail);
-    }
+  function forward(event) {
+    dispatch('message', event.detail);
+  }
 </script>
 
 <Inner on:message={forward}/>
@@ -499,7 +513,7 @@ That's a lot of code to write, so Svelte gives an equivalent shorthand - an `on:
 
 ```svelte
 <script>
-    import Inner from './Inner.svelte';
+  import Inner from './Inner.svelte';
 </script>
 
 <Inner on:message/>
@@ -514,6 +528,484 @@ We want to get notified on clicks on our `<CustomButton>` - to do that, we just 
 
 ```svelte
 <button on:click>
-    Click me
+  Click me
 </button>
 ```
+
+## Bindings
+[Back to Top](#svelte-tutorial-notes)
+
+As a general rule, data flow in Svelte is *top down* - a parent component can set props on a child component, and a component can set attributes on an element, but not the other way around.
+
+### Text Inputs
+[Back to Top](#svelte-tutorial-notes)
+
+Sometimes, it's useful to break that rule. Take the case of the `<input>` element. We *could* add an `on:input` event handler that sets the value of `name` to `event.target.value`, but it gets ugly. Instead, we can use the `bind:value` directive:
+
+```svelte
+<input bind:value={name}>
+```
+
+This means that not only will changes to the value of `name` update the input value, but changes to the input value will update `name`.
+
+### Numeric Inputs
+[Back to Top](#svelte-tutorial-notes)
+
+In the DOM, everything is a string. When dealing with numeric inputs, you have to remember to coerce `input.value` before using it. With `bind:value`, Svelte takes care of it for you:
+
+```svelte
+<input type=number bind:value={a} min=0 max=10>
+<input type=range bind:value={a} min=0 max=10>
+```
+
+### Checkbox Inputs
+[Back to Top](#svelte-tutorial-notes)
+
+Checkboxes are used for toggling between states. Instead of binding to `input.value`, we bind to `input.checked`:
+
+```svelte
+<input type=checkbox bind:checked={yes}>
+```
+
+### Group Inputs
+[Back to Top](#svelte-tutorial-notes)
+
+If you have multiple inputs relating to the same value, you can use `bind:group` along with teh `value` attribute.
+
+Radio inputs int he same group are mutually exclusive; checkbox inputs in the same group form an array of selected values.
+
+Add `bind:group` to each input:
+
+```svelte
+<input type=radio bind:group={scoops} value={1}>
+```
+
+Checkbox inputs can be rendered inside of an `each` block:
+
+```svelte
+<script>
+  let flavours = ['Mint choc chip'];
+  let menu = [
+    'Cookies & cream',
+    'Mint choc chip',
+    'Pecans & prailines'
+  ];
+</script>
+
+<h2>Flavours</h2>
+
+{#each menu as flavour}
+  <label>
+    <input type=checkbox bind:group={flavours} value={flavour}>
+    {flavour}
+  </label>
+{/each}
+```
+
+### Textarea Inputs
+[Back to Top](#svelte-tutorial-notes)
+
+The `<textarea>` element behaves similarly to a text input in Svelte - use `bind:value`:
+
+```svelte
+<textarea bind:value={value}></textarea>
+```
+
+In cases like these, where the names match, we can also use a shorthand form:
+
+```svelte
+<textarea bind:value></textarea>
+```
+
+> This applies to all bindings, not just textareas.
+
+### Select Bindings
+[Back to Top](#svelte-tutorial-notes)
+
+We can also use `bind:value` with `<select>` elements:
+
+```svelte
+<script>
+  let questions = [
+    { id: 1, text: `Where did you go to school?` },
+    { id: 2, text: `What is your mother's name?` },
+    { id: 3, text: `What is another personal fact that an attacker could easily find with Google?` }
+  ];
+
+  let selected;
+</script>
+
+<select bind:value={selected} on:change={() => answer = ''}>
+  {#each questions as question}
+    <option value={question}>
+      {question.text}
+    </option>
+  {/each}
+</select>
+```
+
+### Select Multiple
+[Back to Top](#svelte-tutorial-notes)
+
+A select can have a `multiple` attribute, in which case it will populate to an array rather than selecting a single value:
+
+```svelte
+<script>
+  let flavours = ['Mint choc chip'];
+
+  let menu = [
+    'Cookies & cream',
+    'Mint choc chip',
+    'Pecans & prailines'
+  ];
+</script>
+
+<select multiple bind:value={flavors}>
+  {#each menu as flavour}
+    <option value={flavour}>
+      {flavour}
+    </option>
+  {/each}
+</select>
+```
+
+### Contenteditable Bindings
+[Back to Top](#svelte-tutorial-notes)
+
+Elements with a `contenteditable="true"` attribute support `textContext` and `innerHTML` bindings:
+
+```
+<script>
+  let html = '<p>Write some text!</p>`;
+</script>
+
+<style>
+  [contenteditable] {
+    padding: 0.5em;
+    border: 1px solid #eee;
+    border-radius: 4px;
+  }
+</style>
+
+<div contentedtiable="true"
+     bind:innerHTML={html}></div>
+
+<pre>{html}</pre>
+```
+
+### Each Block Bindings
+[Back to Top](#svelte-tutorial-notes)
+
+You can bind to properties inside an `each` block.
+
+> Also notice how the `.done` class is conditionally set on the `<div>` inside of the `each` block using: `class:done={todo.done}`
+
+```svelte
+<script>
+  let todos = [
+    { done: false, text: 'finish Svelte tutorial' },
+    { done: false, text: 'build an app' },
+    { done: false, text: 'world domination' }
+  ];
+
+  function add() {
+    todos = todos.concat({ done: false, text: '' });
+  }
+
+  function clear() {
+    todos = todos.filter(t => !t.done);
+  }
+
+  $: remaining = todos.filter(t => !t.done).length;
+</script>
+
+<style>
+  .done {
+    opacity: 0.4;
+  }
+</style>
+
+<h1>Todos</h1>
+
+{#each todos as todo}
+  <div class:done={todo.done}>
+    <input type=checkbox
+           bind:checked={todo.done}>
+    <input placeholder="What needs to be done?"
+           bind:value={todo.text}>
+  </div>
+{/each}
+
+<p>{remaining} remaining</p>
+
+<button on:click={add}>
+  Add new
+</button>
+
+<button on:click={clear}>
+  Clear completed
+</button>
+```
+
+### Media Elements
+[Back to Top](#svelte-tutorial-notes)
+
+The `<audio>` and `<video>` elements have several properties that you can bind to.
+
+Property | Return Value | Read Only?
+---------|--------------|-----------
+`duration` | the total duration of the video, in seconds. | yes
+`buffered` | an array of `{start, end}` objects that indicates the ranges of the media source that the browser has buffered (if any) at the moment the `buffered` property is accessed. | yes
+`seekable` | an array of `{start, end}` objects that the user is able to seek to, if any. | yes
+`played` | an array of `{start, end}` objects that contains the ranges of the mdeia source that the browser has played, if any. | yes
+`seeking` | boolean | yes
+`ended` | boolean | yes
+`videoHeight` | an unsigned integer value indicating the intrinsic height of the resource in CSS pixels, or 0 if no media is available yet. ***HTMLVideoElement only*** | yes
+`videoWidth` | an unsigned integer value indicating the intrinsic width of the resource in CSS pixes, or 0 if no media is available yet. ***HTMLVideoElement only*** | yes
+`currentTime` | the current point in the video, in seconds | no
+`playbackRate` | how fast to play the video, where `1` is *normal* | no
+`paused` | boolean | no
+`volume` | a value between 0 and 1 | no
+
+```svelte
+<script>
+  // These values are bound to properties of the video
+  let time = 0;
+  let duration;
+  let paused = true;
+
+  let showControls = true;
+  let showControlsTimeout;
+
+  function handleMousemove(e) {
+    // Make the controls visible, but fade out after
+    // 2.5 seconds of inactivity
+
+    clearTimeout(showControlsTimeout);
+    showControlsTimeout = setTimeout(() => showControls = false, 2500);
+    showControls = true;
+
+    if (!(e.buttons & 1)) return; // mouse not down
+    if (!duration) return; // video not loaded yet;
+
+    const { left, right } = this.getBoundingClientRect();
+    time = duration * (e.clientX - left) / (right - left);
+  }
+
+  function handleMousedown(e) {
+    // we can't rely on the built-in click event, because it fires
+    // after a drag - we have to listen for clicks ourselves
+
+    function handleMouseup() {
+      if (paused) e.target.play();
+      else e.target.pause();
+      cancel();
+    }
+
+    function cancel() {
+      e.target.removeEventListener('mouseup', handleMouseup);
+    }
+
+    e.target.addEventListener('mouseup', handleMouseup);
+
+    setTimeout(cancel, 200);
+  }
+
+  function format(seconds) {
+    if (isNaN(seconds)) return '...';
+
+    const minutes = Math.floor(seconds / 60);
+    seconds = Math.floor(seconds % 60);
+    if (seconds < 10) seconds = `0${seconds}`;
+
+    return `${minutes}:${seconds}`;
+  }
+</script>
+
+<style>
+  div {
+    position: relative;
+  }
+
+  .controls {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    transition: opacity 1s;
+  }
+
+  .info {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  span {
+    padding: 0.2em 0.5em;
+    color: white;
+    text-shadow: 0 0 8px black;
+    font-size: 1.4em;
+    opacity: 0.7;
+  }
+
+  .time {
+    width: 3em;
+  }
+
+  .time:last-child { text-align: right }
+
+  progress {
+    display: block;
+    width: 100%;
+    height: 10px;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  progress::-webkit-progress-bar {
+    background-color: rgba(0,0,0,0.2);
+  }
+
+  progress::-webkit-progress-value {
+    background-color: rgba(255,255,255,0.6);
+  }
+
+  video {
+    width: 100%;
+  }
+</style>
+
+<h1>Caminandes: Llamigos</h1>
+<p>From <a href="https://cloud.blender.org/open-projects">Blender Open Projects</a>. CC-BY</p>
+
+<div>
+  <video poster="https://sveltejs.github.io/assets/caminandes-llamigos.jpg"
+         src="https://sveltejs.github.io/assets/caminandes-llamigos.mp4"
+         on:mousemove={handleMousemove}
+         on:mousedown={handleMousedown}
+         bind:currentTime={time}
+         bind:duration
+         bind:paused></video>
+
+  <div class="controls" style="opacity: {duration && showControls ? 1 : 0}">
+    <progress value="{(time / duration) || 0}"/>
+    <div class="info">
+      <span class="time">{format(time)}</span>
+      <span>click anywhere to {puased ? 'play' : 'pause'} / drag to seek</span>
+      <span class="time">{format(duration)}</span>S
+    </div>
+  </div>
+</div>
+```
+
+### Dimensions
+[Back to Top](#svelte-tutorial-notes)
+
+Every block-level element has `clientWidth`, `clientHeight`, `offsetWidth`, and `offsetHeight` bindings:
+
+```svelte
+<script>
+  let w;
+  let h;
+  let size = 42;
+  let text = 'edit me';
+</script>
+
+<style>
+  input { display: block; }
+  div { display: inline-block; }
+  span { word-break: break-all; }
+</style>
+
+<input type=range bind:value={size}>
+<input bind:value={text}>
+
+<p>size: {w}px x {h}px</p>
+
+<div bind:clientWidth={w}
+     bind:clientHeight={h}>
+  <span style="font-size: {size}px">{text}</span>
+</div>
+```
+
+> These bindings are readonly - changing the values of `w` and `h` won't have any effect.
+
+### This
+[Back to Top](#svelte-tutorial-notes)
+
+The readonly `this` binding applies to every element (and component) and allows you to obtain a reference to rendered elements. For example, we can get a reference to a `<canvas>` element:
+
+```svelte
+<canvas bind:this={canvas}
+        width={32}
+        height={32}></canvas>
+```
+
+> Note that the value of `canvas` will be `undefined` until the component has mounted, so we put the logic inside the `onMount` lifecycle function
+
+```svelte
+<script>
+  import { onMount } from 'svelte';
+
+  let canvas;
+
+  onMount(() => {
+    const ctx = canvas.getContext('2d');
+    let frame;
+
+    (function loop() {
+      frame = requestAnimationFrame(loop);
+
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+      for (let p = 0; p < imageData.length; p += 4) {
+        const i = p / 4;
+        const x = i % canvas.width;
+        const y = i / canvas.height >>> 0;
+
+        const t = window.performance.now();
+
+        const r = 64 + (128 * x / canvas.width) + (64 * Math.sin(t / 1000));
+        const g = 64 + (128 * y / canvas.height) + (64 * Math.cos(t / 1000));
+        const b = 128;
+
+        imageData.data[p + 0] = r;
+        imageData.data[p + 1] = g;
+        imageData.data[p + 2] = b;
+        imageData.data[p + 3] = 255;
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+    }());
+
+    return () => {
+      cancelAnimationFrame(frame);
+    };
+  });
+</script>
+
+<style>
+  canvas {
+    width: 100%;
+    height: 100%;
+    background-color: #666;
+    -webkit-mask: url(svelte-logo-mask.svg) 50% 50% no-repeat;
+    mask: url(svelte-logo-mask.svg) 50% 50% no-repeat;
+  }
+</style>
+
+<canvas bind:this={canvas}
+        width={32}
+        height={32}></canvas>
+```
+
+### Component Bindings
+[Back to Top](#svelte-tutorial-notes)
+
+Just as you can bind to properties of DOM elements, you can bind to component props. For example, we can bind to the `value` prop of `<Keypad>` as though it were a form element:
+
+```svelte
+<Keypad bind:value={pin} on:submit={handleSubmit}/>
+```
+
+> Use component bindings sparingly. It can be difficult to track the flow of data around your application if you have too many of them, especially if there is no 'single source of truth'.
