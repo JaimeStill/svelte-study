@@ -1432,3 +1432,39 @@ export const count = createCount();
 ### Store Bindings
 [Back to Top](#svelte-tutorial-notes)
 
+If a store is writable - i.e. it has a `set` method - you can bind to its value, just as you can bind to local component state.
+
+In this example we have a writable store `name` and a derived store `greeting`, and an input that binds to `$name`. Changing the input value will update `name` and all its dependents.
+
+We can also assign directly to store values inside a component. A button with a click event of: `on:click={() => $name += '!'}`. The `$name += '!'` assignment is equivalent to `name.set($name + '!')`.
+
+**stores.js**  
+```js
+import {
+  writable,
+  derived
+} from 'svelte/store';
+
+export const name = writable('world');
+
+export const greeting = derived(
+  name,
+  $name => `Hello ${$name}!`
+);
+```
+
+**App.svelte**  
+```svelte
+<script>
+  import {
+    name,
+    greeting
+  } from './stores.js'
+</script>
+
+<h1>{$greeting}</h1>
+<input bind:value={$name}>
+<button on:click={() => $name += '!'}>
+  Add exclamation mark!
+</button>
+```
