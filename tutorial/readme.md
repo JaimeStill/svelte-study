@@ -46,9 +46,17 @@
     * [onDestroy](#ondestroy)
     * [beforeUpdate and afterUpdate](#beforeupdate-and-afterupdate)
     * [tick](#tick)
+* [Stores](#stores)
+    * [Writable Stores](#writable-stores)
 
 ## Introduction
-[Back to Top](#svelte-tutorial-notes)
+[Back to Top](#svelte-tutorial-notes)  
+
+The following videos do a great job of expressing why Svelte is the next evolution in front-end web development.  
+
+[The Return of 'Write Less, Do More' by Rich Harris](https://youtu.be/BzX4aTRPzno)    
+
+[Rich Harris - Rethinking Reactivity](https://youtu.be/AdNJ3fydeao)
 
 ### Adding Data
 [Back to Top](#svelte-tutorial-notes)
@@ -1145,4 +1153,94 @@ You can see that behavior in this example. Select a range of text and hit the ta
 
 <textarea value={text}
           on:keydown|preventDefault={handleKeydown}></textarea>
+```
+
+## Stores
+[Back to Top](#svelte-tutorial-notes)
+
+Not all application state belongs inside your application's component hierarchy. Sometimes you'll have values that need to be accessed by multiple unrelated components, or by a regular JavaScript module.
+
+In Svelte, we do this with *stores*. A store is simply an object with a `subscribe` method that allows interested parties to be notified whenever the store value changes.
+
+### Writable Stores
+[Back to Top](#svelte-tutorial-notes)
+
+In `App.svelte`, `count` is a store, and we're setting `count_value` in the `count.subscribe` callback.
+
+In `stores.js`, `count` is a *writable* store, which means it has `set` and `update` methods in addition to `subscribe`.
+
+`Incrementer.svelte` increments the value of `count`, `Decrementer.svelte` decrements the value of `count`, and `Resetter.svelte` resets the value to **0**.
+
+**stores.js**  
+```js
+import { writable } from 'svelte/store';
+
+export const count = writable(0);
+```
+
+**App.svelte**  
+```svelte
+<script>
+  import { count } from './stores.js';
+  import Incrementer from './Incrementer.svelte';
+  import Decrementer from './Decrementer.svelte';
+  import Resetter from './Resetter.svelte';
+
+  let count_value;
+
+  const unsubscribe = count.subscribe(value => {
+    count_value = value;
+  });
+</script>
+
+<h1>The count is {count_value}</h1>
+
+<Incrementer />
+<Decrementer />
+<Resetter />
+```
+
+**Incrementer.svelte**  
+```svelte
+<script>
+  import { count } from './stores.js';
+
+  function increment() {
+    count.update(n => ++n);
+  }
+</script>
+
+<button on:click={increment}>
+  +
+</button>
+```
+
+**Decrementer.svelte**  
+```svelte
+<script>
+  import { count } from './stores.js';
+
+  function decrement() {
+    count.update(n => --n);
+  }
+</script>
+
+<button on:click={decrement}>
+  -
+</button>
+```
+
+**Resetter.svelte**  
+```svelte
+<script>
+  import { count } from './stores.js';
+
+  function reset() {
+    count.set(0);
+  }
+</script>
+
+<button on:click={reset}>
+  reset
+</button>
 ```
