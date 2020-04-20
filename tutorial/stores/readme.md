@@ -8,6 +8,7 @@
 * [Events](../events/readme.md)
 * [Bindings](../bindings/readme.md)
 * [Lifecycle](../lifecycle/readme.md)
+* [Motion](../motion/readme.md)
 
 **Contents**  
 * [Writable Stores](#writable-stores)

@@ -7,7 +7,8 @@
 * [Events](../events/readme.md)
 * [Bindings](../bindings/readme.md)
 * [Lifecycle](../lifecycle/readme.md)
-* [Stores](../stores/readme.md)  
+* [Stores](../stores/readme.md)
+* [Motion](../motion/readme.md)
 
 **Contents**  
 * [Assignments](#assignments)

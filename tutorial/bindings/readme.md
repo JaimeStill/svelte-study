@@ -8,6 +8,7 @@
 * [Events](../events/readme.md)
 * [Lifecycle](../lifecycle/readme.md)
 * [Stores](../stores/readme.md)
+* [Motion](../motion/readme.md)
 
 **Contents**  
 * [Text Inputs](#text-inputs)

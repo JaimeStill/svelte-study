@@ -8,6 +8,7 @@
 * [Bindings](../bindings/readme.md)
 * [Lifecycle](../lifecycle/readme.md)
 * [Stores](../stores/readme.md)
+* [Motion](../motion/readme.md)
 
 **Contents**  
 * [if blocks](#if-blocks)
