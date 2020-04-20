@@ -68,7 +68,7 @@ Both springs have default `stiffness` and `damping` values, which control the sp
 
 ```svelte
 <script>
-  import { spring } from 'svelte/motion`;
+  import { spring } from 'svelte/motion';
 
   let coords = spring({ x: 50, y: 50 }, {
     stiffness: 0.1,
