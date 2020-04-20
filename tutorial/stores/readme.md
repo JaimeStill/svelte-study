@@ -9,6 +9,7 @@
 * [Bindings](../bindings/readme.md)
 * [Lifecycle](../lifecycle/readme.md)
 * [Motion](../motion/readme.md)
+* [Transitions](../transitions/readme.md)
 
 **Contents**  
 * [Writable Stores](#writable-stores)

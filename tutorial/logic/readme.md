@@ -9,6 +9,7 @@
 * [Lifecycle](../lifecycle/readme.md)
 * [Stores](../stores/readme.md)
 * [Motion](../motion/readme.md)
+* [Transitions](../transitions/readme.md)
 
 **Contents**  
 * [if blocks](#if-blocks)

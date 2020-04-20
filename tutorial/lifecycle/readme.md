@@ -9,6 +9,7 @@
 * [Bindings](../bindings/readme.md)
 * [Stores](../stores/readme.md)
 * [Motion](../motion/readme.md)
+* [Transitions](../transitions/readme.md)
 
 **Contents**  
 * [onMount](#onmount)

@@ -9,6 +9,7 @@
 * [Bindings](../bindings/readme.md)
 * [Lifecycle](../lifecycle/readme.md)
 * [Stores](../stores/readme.md)
+* [Transitions](../transitions/readme.md)
 
 **Contents**  
 * [Tweened](#tweened)
