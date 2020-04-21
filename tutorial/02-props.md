@@ -13,6 +13,8 @@
 * [Animations](./10-animations.md)
 * [Actions](./11-actions.md)
 * [Classes](./12-classes.md)
+* [Component Composition](./13-component-composition.md)
+* [Context API](./14-context-api.md)
 
 **Contents**  
 * [Default Values](#default-values)

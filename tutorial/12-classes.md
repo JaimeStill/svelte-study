@@ -13,6 +13,8 @@
 * [Transitions](./09-transitions.md)
 * [Animations](./10-animations.md)
 * [Actions](./11-actions.md)
+* [Component Composition](./13-component-composition.md)
+* [Context API](./14-context-api.md)
 
 **Contents**  
 * [The class Directive](#the-class-directive)
