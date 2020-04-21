@@ -15,6 +15,7 @@
 * [Classes](./12-classes.md)
 * [Component Composition](./13-component-composition.md)
 * [Context API](./14-context-api.md)
+* [Special Elements](./15-special-elements.md)
 
 In the previous topic ([transitions](./09-transitions.md)), we used deferred transitions to create the illusion of motion as elements move from one todo list to the other.
 

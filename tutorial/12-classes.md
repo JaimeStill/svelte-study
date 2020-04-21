@@ -15,6 +15,7 @@
 * [Actions](./11-actions.md)
 * [Component Composition](./13-component-composition.md)
 * [Context API](./14-context-api.md)
+* [Special Elements](./15-special-elements.md)
 
 **Contents**  
 * [The class Directive](#the-class-directive)

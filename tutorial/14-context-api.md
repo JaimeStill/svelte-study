@@ -15,6 +15,7 @@
 * [Actions](./11-actions.md)
 * [Classes](./12-classes.md)
 * [Component Composition](./13-component-composition.md)
+* [Special Elements](./15-special-elements.md)
 
 **Contents**
 * [Context Keys](#context-keys)

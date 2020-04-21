@@ -15,6 +15,7 @@
 * [Classes](./12-classes.md)
 * [Component Composition](./13-component-composition.md)
 * [Context API](./14-context-api.md)
+* [Special Elements](./15-special-elements.md)
 
 **Contents**  
 * [Adding Data](#adding-data)

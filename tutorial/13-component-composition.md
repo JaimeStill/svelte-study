@@ -15,6 +15,7 @@
 * [Actions](./11-actions.md)
 * [Classes](./12-classes.md)
 * [Context API](./14-context-api.md)
+* [Special Elements](./15-special-elements.md)
 
 **Contents**  
 * [Slots](#slots)
