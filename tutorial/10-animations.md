@@ -1,18 +1,20 @@
 # Animations
 
 **Topics**  
-* [Introduction](../readme.md)
-* [Reactivity](../reactivity/readme.md)
-* [Props](../props/readme.md)
-* [Logic](../logic/readme.md)
-* [Events](../events/readme.md)
-* [Bindings](../bindings/readme.md)
-* [Lifecycle](../lifecycle/readme.md)
-* [Stores](../stores/readme.md)
-* [Motion](../motion/readme.md)
-* [Transitions](../transitions/readme.md)
+* [Introduction](./readme.md)
+* [Reactivity](./01-reactivity.md)
+* [Props](./02-props.md)
+* [Logic](./03-logic.md)
+* [Events](./04-events.md)
+* [Bindings](./05-bindings.md)
+* [Lifecycle](./06-lifecycle.md)
+* [Stores](./07-stores.md)
+* [Motion](./08-motion.md)
+* [Transitions](./09-transitions.md)
+* [Actions](./11-actions.md)
+* [Classes](./12-classes.md)
 
-In the previous topic ([transitions](../transitions/readme.md)), we used deferred transitions to create the illusion of motion as elements move from one todo list to the other.
+In the previous topic ([transitions](./09-transitions.md)), we used deferred transitions to create the illusion of motion as elements move from one todo list to the other.
 
 To complete the illusion, we also need to apply motion to the elements that *aren't* transitioning. For this, we use the `animate` directive.
 

@@ -1,16 +1,18 @@
 # Transitions
 
 **Topics**  
-* [Introduction](../readme.md)
-* [Reactivity](../reactivity/readme.md)
-* [Props](../props/readme.md)
-* [Logic](../logic/readme.md)
-* [Events](../events/readme.md)
-* [Bindings](../bindings/readme.md)
-* [Lifecycle](../lifecycle/readme.md)
-* [Stores](../stores/readme.md)
-* [Motion](../motion/readme.md)
-* [Animations](../animations/readme.md)
+* [Introduction](./readme.md)
+* [Reactivity](./01-reactivity.md)
+* [Props](./02-props.md)
+* [Logic](./03-logic.md)
+* [Events](./04-events.md)
+* [Bindings](./05-bindings.md)
+* [Lifecycle](./06-lifecycle.md)
+* [Stores](./07-stores.md)
+* [Motion](./08-motion.md)
+* [Animations](./10-animations.md)
+* [Actions](./11-actions.md)
+* [Classes](./12-classes.md)
 
 **Contents**  
 * [The transition Directive](#the-transition-directive)
