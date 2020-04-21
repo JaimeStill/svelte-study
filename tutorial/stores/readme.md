@@ -10,6 +10,7 @@
 * [Lifecycle](../lifecycle/readme.md)
 * [Motion](../motion/readme.md)
 * [Transitions](../transitions/readme.md)
+* [Animations](../animations/readme.md)
 
 **Contents**  
 * [Writable Stores](#writable-stores)

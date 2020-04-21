@@ -10,6 +10,7 @@
 * [Lifecycle](../lifecycle/readme.md)
 * [Stores](../stores/readme.md)
 * [Motion](../motion/readme.md)
+* [Animations](../animations/readme.md)
 
 **Contents**  
 * [The transition Directive](#the-transition-directive)

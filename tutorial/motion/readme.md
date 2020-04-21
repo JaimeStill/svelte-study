@@ -10,6 +10,7 @@
 * [Lifecycle](../lifecycle/readme.md)
 * [Stores](../stores/readme.md)
 * [Transitions](../transitions/readme.md)
+* [Animations](../animations/readme.md)
 
 **Contents**  
 * [Tweened](#tweened)

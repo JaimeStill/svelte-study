@@ -10,6 +10,7 @@
 * [Stores](../stores/readme.md)
 * [Motion](../motion/readme.md)
 * [Transitions](../transitions/readme.md)
+* [Animations](../animations/readme.md)
 
 **Contents**  
 * [onMount](#onmount)
