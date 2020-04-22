@@ -20,13 +20,13 @@
 **Contents**
 * [package.json](#packagejson)
 * [src](#src)
-    * [src/client.js](#src/client.js)
-    * [src/server.js](#src/server.js)
-    * [src/service-worker.js](#src/service-worker.js)
-    * [src/template.html](#src/template.html)
-* [src/routes](#src/routes)
+    * [src/client.js](#srcclientjs)
+    * [src/server.js](#srcserverjs)
+    * [src/service-worker.js](#srcservice-workerjs)
+    * [src/template.html](#srctemplatehtml)
+* [src/routes](#srcroutes)
 * [static](#static)
-* [rollup.config.js / webpack.config.js](#rollup.config.js-/-webpack.config.js)
+* [rollup.config.js / webpack.config.js](#rollupconfigjs--webpackconfigjs)
 
 If you take a look inside the [sapper-template](https://github.com/sveltejs/sapper-template) repo, you'll see some files that Sapper expects to find:
 
