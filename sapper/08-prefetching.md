@@ -16,3 +16,12 @@
 * [Base URLs](./13-base-urls.md)
 * [Testing](./14-testing.md)
 * [Debugging](./15-debugging.md)
+
+**Contents**
+* [rel=prefetch](#relprefetch)
+
+
+
+## rel=prefetch
+[Back to Top](#prefetching)
+

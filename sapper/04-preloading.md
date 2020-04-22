@@ -21,9 +21,9 @@
 * [Argument](#argument)
 * [Return Value](#return-value)
 * [Context](#context)
-  * [this.fetch](#this.fetch)
-  * [this.error](#this.error)
-  * [this.redirect](#this.redirect)
+  * [this.fetch](#thisfetch)
+  * [this.error](#thiserror)
+  * [this.redirect](#thisredirect)
 
 As seen in the [routing](./02-routing.md) section, page components can have an optional `preload` function that will load some data that the page depends on. This is similar to `getInitialProps` in Next.js or `asyncData` in Nuxt.js.
 
