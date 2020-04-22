@@ -19,7 +19,7 @@
 
 **Contents**
 * [start({ target })](#start-target-)
-* [goto(href, options?)](#gotohref-options-)
+* [goto(href, options?)](#gotohref-options)
 * [prefetch(href)](#prefetchhref)
 * [prefetchRoutes(routes?)](#prefetchroutesroutes)
 
