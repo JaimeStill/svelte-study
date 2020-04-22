@@ -17,6 +17,7 @@
 * [Component Composition](./13-component-composition.md)
 * [Context API](./14-context-api.md)
 * [Module Context](./16-module-context.md)
+* [Debugging](./17-debugging.md)
 
 **Contents**
 * [\<svelte:self>](#-svelte:self-)

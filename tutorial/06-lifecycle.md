@@ -17,6 +17,7 @@
 * [Context API](./14-context-api.md)
 * [Special Elements](./15-special-elements.md)
 * [Module Context](./16-module-context.md)
+* [Debugging](./17-debugging.md)
 
 **Contents**  
 * [onMount](#onmount)

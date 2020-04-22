@@ -17,6 +17,7 @@
 * [Component Composition](./13-component-composition.md)
 * [Context API](./14-context-api.md)
 * [Special Elements](./15-special-elements.md)
+* [Debugging](./17-debugging.md)
 
 **Contents**  
 * [Sharing Code](#sharing-code)
