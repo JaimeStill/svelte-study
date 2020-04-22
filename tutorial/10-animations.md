@@ -18,6 +18,7 @@
 * [Special Elements](./15-special-elements.md)
 * [Module Context](./16-module-context.md)
 * [Debugging](./17-debugging.md)
+* [Congratulations](./18-congratulations)
 
 In the previous topic ([transitions](./09-transitions.md)), we used deferred transitions to create the illusion of motion as elements move from one todo list to the other.
 

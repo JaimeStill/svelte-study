@@ -18,6 +18,7 @@
 * [Context API](./14-context-api.md)
 * [Module Context](./16-module-context.md)
 * [Debugging](./17-debugging.md)
+* [Congratulations](./18-congratulations)
 
 **Contents**
 * [\<svelte:self>](#-svelte:self-)

@@ -18,6 +18,7 @@
 * [Context API](./14-context-api.md)
 * [Special Elements](./15-special-elements.md)
 * [Debugging](./17-debugging.md)
+* [Congratulations](./18-congratulations)
 
 **Contents**  
 * [Sharing Code](#sharing-code)

@@ -18,6 +18,7 @@
 * [Context API](./14-context-api.md)
 * [Special Elements](./15-special-elements.md)
 * [Module Context](./16-module-context.md)
+* [Congratulations](./18-congratulations)
 
 Occasionally, it's useful to inspect a piece of data as it flows through your app.
 

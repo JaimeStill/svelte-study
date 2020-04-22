@@ -18,6 +18,7 @@
 * [Special Elements](./15-special-elements.md)
 * [Module Context](./16-module-context.md)
 * [Debugging](./17-debugging.md)
+* [Congratulations](./18-congratulations)
 
 **Contents**  
 * [The class Directive](#the-class-directive)
