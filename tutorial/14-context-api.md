@@ -16,6 +16,7 @@
 * [Classes](./12-classes.md)
 * [Component Composition](./13-component-composition.md)
 * [Special Elements](./15-special-elements.md)
+* [Module Context](./16-module-context.md)
 
 **Contents**
 * [Context Keys](#context-keys)
