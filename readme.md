@@ -12,7 +12,11 @@ Unlike single-page apps, Sapper doesn't compromise on SEO, progressive enhanceme
 
 [Read the introductory blog post](https://svelte.dev/blog/sapper-towards-the-ideal-web-app-framework) to learn more.
 
+[Polka](https://github.com/lukeed/polka) is an extremely minimal, highly performant Express.js alternative. Essentially, Polka is just a [native HTTP server](https://nodejs.org/dist/latest-v9.x/docs/api/http.html#http_class_http_server) with added support for routing, middleware, and sub-applications.
+
 ## Repository
 
-* [Svelte Tutorial](./tutorial)
+* [Svelte](./svelte)
 * [Sapper](./sapper)
+* [Polka](./polka)
+* [Projects](./src)
