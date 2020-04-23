@@ -15,6 +15,10 @@
   * [Methods](#methods)
   * [Handlers](#handlers)
     * [Async Handlers](#async-handlers)
+* [Middleware](#middleware)
+  * [Middleware Sequence](#middleware-sequence)
+  * [Middleware Errors](#middleware-errors)
+* [Comparisons](#comparisons)
 
 Polka is an extremely minimal, highly performant Express.js alternative.
 
@@ -284,3 +288,286 @@ It's a **very good** practice to *always* terminate your response ([`res.end`](h
 #### Async Handlers
 [Back to Top](#polka)
 
+If using Node 7.4 or later, you may leverage native `async` and `await` syntax.
+
+No special preparation is needed - simply add the appropriate keywords.
+
+```js
+const app = polka();
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+async function authenticate(req, res, next) {
+  let token = req.headers['authorization'];
+  if (!token) return (res.statusCode=401,res.end('No token!'));
+  req.user = await Users.find(token);
+  next();
+}
+
+app
+  .use(authenticate)
+  .get('/', async (req, res) => {
+    console.log('~> current user', req.user);
+    await sleep(500);
+    res.end(`Hello, ${req.user.name}`);
+  });
+```
+
+## Middleware
+[Back to Top](#polka)
+
+Middleware are functions that run in between (hence "middle") receiving the request and executing your route's [`handler`](#handlers) response.
+
+> Coming from Express? Use any middleware you already know and love.
+
+The middleware signature receives the request (`req`), the response (`res`), and a callback (`next`).
+
+These can apply mutations to the `req` and `res` objects, and unlike Express, have access to `req.params`, `req.path`, `req.search`, and `req.query`.
+
+Most importantly, a middleware ***must*** either call `next()` or terminate the response (`res.end`). Failure to do this will result in a never-ending response, which will eventually crash the `http.Server`.
+
+```js
+function logger(req, res, next) {
+  console.log(`~> Received ${req.method} on ${req.url}`);
+  next();
+}
+
+function authorize(req, res, next) {
+  req.token = req.headers['authorization'];
+  req.token ? next() : ((res.statusCode=401) && res.end('No token!'));
+}
+
+polka()
+  .use(logger, authorize)
+  .get('*', (req, res) => {
+    console.log(`~> user token: ${req.token}`);
+    res.end('Hello, valid user');
+  });
+```
+
+```bash
+$ curl /
+# ~> Received GET on /
+#=> (401) No token!
+
+$curl -H "authorization: secret" /foobar
+# ~> Received GET on /foobar
+# ~> user token: secret
+#=> (200) Hello, valid user
+```
+
+### Middleware Sequence
+[Back to Top](#polka)
+
+In Polka, middleware functions are organized into tiers.
+
+Unlike Express, Polka middleware are tiered into "global", "filtered", and "route-specific" groups.
+
+* Global middleware are defined via `.use('/', ...fn)` or `.use(...fn)`, which are synonymous. *Because* every request's `pathname` begins with a `/`, this tier is always triggered.
+
+* Sub-group or "filtered" middleware are defined wiht a base `pathname` that's more specific than `/`. For example, defining `.use('/users', ...fn)` will run on any `/users/**/*` request.
+  * These functions will execute *after* "global" middleware but before the route-specific handler.
+
+* Route handlers match specific paths and execute last in the chain. They must also match the `method` action.
+
+Once the chain of middleware handler(s) has been composed, Polka will iterate through them sequentially until all functions have run, until a chain member has terminated the response early, or until a chain member has thrown an error.
+
+Contrast this with Express, which does not tier your middleware and instead iterates through your entire application in the sequence that you composed it.
+
+```js
+// Express
+express()
+  .get('/', get)
+  .use(foo)
+  .get('/users/123', user)
+  .use('/users', users);
+
+// Polka
+Polka()
+  .get('/', get)
+  .use(foo)
+  .get('/users/123', user)
+  .use('/users', users);
+```
+
+```bash
+$ curl {APP}/
+# Express :: [get]
+# Polka   :: [foo, get]
+
+$ curl {APP}/users/123
+# Express :: [foo, user]
+# Polka   :: [foo, users, user]
+```
+
+### Middleware Errors
+[Back to Top](#polka)
+
+If an error arises within a middleware, the loop will be exited. This means that no other middleware will execute and neither will the route handler.
+
+Similarly, regardless of `statusCode`, an early response termination will also exit the loop and prevent the route handler from running.
+
+There are three ways to "throw" an error from within a middleware function.
+
+> **Hint**: None of them use `throw`
+
+1. **Pass any string to `next()`**
+
+    This will exit the loop and send a `500` status code, with your erro string as the response body.
+
+    ```js
+    polka()
+      .use((res, res, next) => next('💩'))
+      .get('*', (res, res) => '*', (req, res) => res.end('wont run'));
+    ```
+
+    ```bash
+    $ curl /
+    #=> (500) 💩
+    ```
+
+2. **Pass an `Error` to `next()`**
+
+    This is similar to the above option, but gives you a window in changing the `statusCode` to something other than the `500` default.
+
+    ```js
+    function oopsies(req, res, next) {
+      let err = new Error('try again');
+      err.code = 422;
+      next(err);
+    }
+    ```
+
+    ```bash
+    $ curl /
+    #=> (422) Try again
+    ```
+
+3. **Terminate the response early**
+
+    Once the response has been ended, there's no reason to continue the loop!
+
+    This approach is the most versatile as it allows to control every aspect of the outgoing `res`.
+
+    ```js
+    function oopsies(req, res, next) {
+      if (true) {
+        res.writeHead(400, {
+          'Content-Type': 'application/json',
+          'X-Error-Code': 'Please dont do this IRL'
+        });
+
+        let json = JSON.stringify({ error: 'Missing CSRF token' });
+        res.end(json);
+      } else {
+        next(); // never called FYI
+      }
+    }
+    ```
+
+    ```bash
+    $ curl /
+    #=> (400) {"error":"Missing CSRF token"}
+    ```
+
+## Comparisons
+[Back to Top](#polka)
+
+Polka's API aims to be *very* similar to Express since most Node.js developers are already familiar with it. If you know Express, you already know Polka.
+
+There are, however, a few main differences. Polka does not support or offer:
+
+1. **Polka uses a tiered middleware system.**
+
+    Express maintains the sequence of your route and middleware declarations during its runtime, which can pose a problem when composing sub-applications. Typically, this forces you to duplicate groups of logic.
+
+    Please see [Middleware Sequence](#middleware-sequence) for an example and additional details.
+
+2. **Any built-in view/rendering engines**.
+
+    Most templating engines can be incorporated into middleware functions or used directly within a route handler.
+
+3. **The ability to `throw` from within middleware.**
+
+    However, all other forms of middleware-errors are supported. (See [Middleware Errors](#middleware-errors).)
+
+    ```js
+    function middleware(req, res, next) {
+      // pass an error message to next()
+      next('uh oh');
+
+      // pass an Error to next()
+      next(new Error('🙀'));
+
+      // send an early, customized error response
+      res.statusCode = 401;
+      res.end('Who are you?');
+    }
+    ```
+
+4. **Express-like response helpers... yet! [(#14)](https://github.com/lukeed/polka/issues/14)**
+
+    Express has a nice set of [response helpers](http://expressjs.com/en/4x/api.html#res.append). While Polka relies on the [native Node.js response methods](https://nodejs.org/dist/latest-v9.x/docs/api/http.html#http_class_http_serverresponse), it would be very easy / possible to attach a global middleware that contained a similar set of helpers.
+
+5. **`RegExp`-based route patterns.**
+
+    Polka's router uses string comparison to match paths against patterns. It's a lot quicker and more efficient.
+
+    The following routing patterns **are not** supported:
+
+    ```js
+    app.get('/ab?cd', _ => {});
+    app.get('/ab+cd', _ => {});
+    app.get('/ab*cd', _ => {});    
+    app.get('/ab(cd)?e', _ => {});
+    app.get('/a/', _ => {});
+    app.get('/.*fly$/', _ => {});
+    ```
+
+    The following routing patterns **are** supported:
+
+    ```js
+    app.get('/users', _ => {});
+    app.get('/users/:id', _ => {});
+    app.get('/users/:id?', _ => {});
+    app.get('/users/:id/books/:title', _ => {});
+    app.get('/users/*', _ => {});
+    ```
+
+6. **Polka instances are not (directly) the request handler.**
+
+    Most packages in the Express ecosystem expect you to pass your `app` directly into the package. This is because `express()` returns only a middleware signature directly.
+
+    In the Polka-sphere, this functionality lives in your application's [`handler`](#handlerreq-res-parsed) instead.
+
+    Here's an example with [`supertest`](https://github.com/visionmedia/supertest), a popular testing utility for Express apps.
+
+    ```js
+    const request = require('supertest');
+    const send = require('@polka/send-type');
+
+    const express = require('express')();
+    const polka = require('polka')();
+
+    express.get('/user', (req, res) => {
+      res.status(200).json({ name: 'john' });
+    });
+
+    polka.get('/user', (req, res) => {
+      send(res, 200, { name: 'john' });
+    });
+
+    function isExpected(app) {
+      request(app)
+        .get('/user')
+        .expect('Content-Type', /json/)
+        .expect('Content-Length', '15')
+        .expect(200);
+    }
+
+    // Express: Pass in the entire application directly
+    isExpected(express);
+
+    // Polka: Pass in the application `handler` instead
+    isExpected(polka.handler);
+    ```
