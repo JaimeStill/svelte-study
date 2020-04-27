@@ -19,4 +19,3 @@ Unlike single-page apps, Sapper doesn't compromise on SEO, progressive enhanceme
 * [Svelte](./svelte)
 * [Sapper](./sapper)
 * [Polka](./polka)
-* [Projects](./src)
