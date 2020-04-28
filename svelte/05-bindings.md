@@ -70,7 +70,7 @@ Checkboxes are used for toggling between states. Instead of binding to `input.va
 ## Group Inputs
 [Back to Top](#bindings)
 
-If you have multiple inputs relating to the same value, you can use `bind:group` along with teh `value` attribute.
+If you have multiple inputs relating to the same value, you can use `bind:group` along with the `value` attribute.
 
 Radio inputs int he same group are mutually exclusive; checkbox inputs in the same group form an array of selected values.
 

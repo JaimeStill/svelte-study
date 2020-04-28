@@ -137,7 +137,7 @@ Returns: `Polka`
 
 Boots (or creates) the underlying [`http.Server`](https://nodejs.org/api/http.html#http_class_http_server) for the first time. All arguments are passed to [`server.listen`](https://nodejs.org/dist/latest-v9.x/docs/api/net.html#net_server_listen) directly with no changes.
 
-As of `v0.5.0`, this method no longer returns a Promise. Instead, teh current Polka instance is returned directly, allowing for chained operations:
+As of `v0.5.0`, this method no longer returns a Promise. Instead, the current Polka instance is returned directly, allowing for chained operations:
 
 ```js
 // Could not do this before 0.5.0
@@ -175,7 +175,7 @@ Type: `ServerResponse`
 
 Type: `Object`
 
-Optionally provide a parsed [URL](https://nodejs.org/dist/latest-v9.x/docs/api/url.html#url_class_url) object. Useful if you've already parsed teh incoming path. Otherwise, [`app.parse`](#parsereq) (aka [`parseurl`](https://github.com/pillarjs/parseurl)) will run by default.
+Optionally provide a parsed [URL](https://nodejs.org/dist/latest-v9.x/docs/api/url.html#url_class_url) object. Useful if you've already parsed the incoming path. Otherwise, [`app.parse`](#parsereq) (aka [`parseurl`](https://github.com/pillarjs/parseurl)) will run by default.
 
 ## Routing
 [Back to Top](#polka)
@@ -365,7 +365,7 @@ Unlike Express, Polka middleware are tiered into "global", "filtered", and "rout
 
 * Global middleware are defined via `.use('/', ...fn)` or `.use(...fn)`, which are synonymous. *Because* every request's `pathname` begins with a `/`, this tier is always triggered.
 
-* Sub-group or "filtered" middleware are defined wiht a base `pathname` that's more specific than `/`. For example, defining `.use('/users', ...fn)` will run on any `/users/**/*` request.
+* Sub-group or "filtered" middleware are defined with a base `pathname` that's more specific than `/`. For example, defining `.use('/users', ...fn)` will run on any `/users/**/*` request.
   * These functions will execute *after* "global" middleware but before the route-specific handler.
 
 * Route handlers match specific paths and execute last in the chain. They must also match the `method` action.

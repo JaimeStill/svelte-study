@@ -203,7 +203,7 @@ export const time = readable(null, function start(set) {
 ## Derived Stores
 [Back to Top](#stores)
 
-You can create a store whose value is based on teh value of one or more *other* stores with `derived`. Building on the previous example, we can create a store that derives how the duration has been open.
+You can create a store whose value is based on the value of one or more *other* stores with `derived`. Building on the previous example, we can create a store that derives how the duration has been open.
 
 **stores.js**  
 ```js

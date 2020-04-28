@@ -75,7 +75,7 @@ We can make more appealing user interfaces by gracefully transitioning elements 
 {/if}
 ```
 
-Note that the transition is *reversible* - if you toggle the checkbox while the transition is ongoing, it transitions from teh current point, rather than the beginning or the end.
+Note that the transition is *reversible* - if you toggle the checkbox while the transition is ongoing, it transitions from the current point, rather than the beginning or the end.
 
 ## In and Out
 [Back to Top](#transitions)
@@ -134,7 +134,7 @@ The `t` value is `0` at the beginning of an intro or the end of an outro, and `1
 
 Most of the time you should return the `css` property and *not* the `tick` property, as CSS animations run off the main thread to prevent jank where possible. Svelte 'simulates' the transition and constructs a CSS animation, then lets it run.
 
-For example, teh `fade` transition generates a CSS animation somewhat like this:
+For example, the `fade` transition generates a CSS animation somewhat like this:
 
 ```css
 0% { opacity: 0 }

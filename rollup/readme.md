@@ -30,7 +30,7 @@ This will make Rollup available as a global command line tool. You can also inst
 ## Quick Start
 [Back to Top](#rollupjs)
 
-Rollup can be used either through a [command line interface](./01-command-line-interface.md) wiht an optional configuration file, or else through its [JavaScript API](./02-javascript-api.md). Run `rollup --help` to see the available options and parameters.
+Rollup can be used either through a [command line interface](./01-command-line-interface.md) with an optional configuration file, or else through its [JavaScript API](./02-javascript-api.md). Run `rollup --help` to see the available options and parameters.
 
 > See [rollup-starter-lib](https://github.com/rollup/rollup-starter-lib) and [rollup-starter-app](https://github.com/rollup/rollup-starter-app) to see example library and application projects using Rollup.
 

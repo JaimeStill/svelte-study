@@ -24,7 +24,7 @@
 * [Context Keys](#context-keys)
 * [Contexts vs. Stores](#contexts-vs.-stores)
 
-The context API provides a mechanism for components to 'talk' to each other wihtout passing around data nad functions as props, or dispatching lots of events. It's an advanced feature, but a useful one.
+The context API provides a mechanism for components to 'talk' to each other without passing around data nad functions as props, or dispatching lots of events. It's an advanced feature, but a useful one.
 
 Take this example app using a [Mapbox GL](https://docs.mapbox.com/mapbox-gl-js/overview/) map. We'd like to display the markers, using the `<MapMarker>` component, but we don't want to have to pass around a reference to the underlying Mapbox instance as a prop of each component.
 
