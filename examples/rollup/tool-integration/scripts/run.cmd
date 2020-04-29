@@ -1,0 +1,1 @@
+node -e "require('./dist/bundle.js')()"

@@ -1,0 +1,20 @@
+{
+  "name": "rollup-tutorial",
+  "version": "1.0.0",
+  "description": "Rollup tutorial",
+  "main": "src/main.js",
+  "scripts": {    
+    "build": "yarn build:json && yarn build:cjs && yarn build:es && yarn build:system",
+    "build:json": "rollup -c",
+    "build:cjs": "rollup src/main.js src/main2.js -f cjs -d dist/cjs",
+    "build:es": "rollup src/main.js src/main2.js -f es -d dist/es",
+    "build:system": "rollup src/main.js src/main2.js -f system -d dist/system"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-json": "^4.0.3",
+    "rollup": "^2.7.3",
+    "rollup-plugin-terser": "^5.3.0"
+  }
+}
